@@ -39,7 +39,6 @@ It combines **Machine Learning** with a **full-stack architecture** to help stud
 flowchart LR
     A[User Uploads Resume] --> B[Express API]
     B --> C[Flask ML Service]
-    C --> D[Model (TF-IDF + Naive Bayes)]
-    D --> E[Predicted Job Categories + Confidence]
+    C --> D[Model: TF-IDF and Naive Bayes]
+    D --> E[Predicted Job Categories and Confidence]
     E --> F[Frontend Displays Results]
-
