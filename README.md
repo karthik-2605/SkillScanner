@@ -37,8 +37,9 @@ It combines **Machine Learning** with a **full-stack architecture** to help stud
 ## 🚀 Project Workflow
 ```mermaid
 flowchart LR
-A[User Uploads Resume] --> B[Express API]
-B --> C[Flask ML Service]
-C --> D[Model (TF-IDF + Naive Bayes)]
-D --> E[Predicted Job Categories + Confidence]
-E --> F[Frontend Displays Results]
+    A[User Uploads Resume] --> B[Express API]
+    B --> C[Flask ML Service]
+    C --> D[Model (TF-IDF + Naive Bayes)]
+    D --> E[Predicted Job Categories + Confidence]
+    E --> F[Frontend Displays Results]
+
