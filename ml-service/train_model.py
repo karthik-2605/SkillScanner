@@ -19,7 +19,7 @@ csv_df = df.rename(columns={"cleaned_resume": "cleaned_text", "Category": "categ
 db = mysql.connector.connect(
     host="localhost",
     user="root",
-    password="9820256@MajorK",
+    password=# ***** password *****,
     database="skillScanner"
 )
 cursor = db.cursor(dictionary=True)
