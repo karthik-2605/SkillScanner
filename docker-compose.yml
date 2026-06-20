@@ -1,0 +1,30 @@
+# Spins up MySQL with the schema + seed data pre-loaded, so contributors can
+# get a working database with a single command:
+#
+#     docker compose up -d
+#
+# The backend/ml-service then connect to it on localhost:3306 using the
+# credentials below (which match the provided .env.example files).
+services:
+  db:
+    image: mysql:8.0
+    container_name: skillscanner-db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: skillscanner
+      MYSQL_DATABASE: skillScanner
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+      # *.sql files here run automatically on first startup (alphabetical order).
+      - ./backend/db/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+      - ./backend/db/seed.sql:/docker-entrypoint-initdb.d/02-seed.sql:ro
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-pskillscanner"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  db_data:

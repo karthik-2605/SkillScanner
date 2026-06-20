@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import api from "../api.js";
 
 export default function Header() {
   const [selectedFile, setselectedFile] = useState(null);
@@ -30,15 +30,9 @@ export default function Header() {
 
     try {
       setLoading(true); // ⬅️ start loading
-      const response = await axios.post(
-        "http://localhost:8000/upload",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+      const response = await api.post("/upload", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
 
       console.log("Server response: ", response.data);
 

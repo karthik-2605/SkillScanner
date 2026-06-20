@@ -1,10 +1,10 @@
-import axios from "axios";
+import api from "../api.js";
 export default function Display_jobs({jobs,fetchJobs,setEditingJob}){
 
     const handleDelete = async (id) =>{
         if(!window.confirm("Are you sure you want to delete the job?")) return;
         try{
-            await axios.delete(`http://localhost:8000/jobs/${id}`);
+            await api.delete(`/jobs/${id}`);
             fetchJobs();
             
         }catch(err){
@@ -38,8 +38,8 @@ export default function Display_jobs({jobs,fetchJobs,setEditingJob}){
                                 <td>{job.category}</td>
                                 <td>{job.location}</td>
                                 <td>
-                                    <button onClick={()=> setEditingJob(job)}><i class="fa-solid fa-pen-to-square edit"></i></button>
-                                    <button onClick={()=>handleDelete(job.id)}><i class="fa-solid fa-trash delete"></i></button>
+                                    <button onClick={()=> setEditingJob(job)}><i className="fa-solid fa-pen-to-square edit"></i></button>
+                                    <button onClick={()=>handleDelete(job.id)}><i className="fa-solid fa-trash delete"></i></button>
                                 
                                 </td>
 

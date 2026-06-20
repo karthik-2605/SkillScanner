@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
+import api from "../api.js";
 import Navbar from "./Navbar.jsx";
 import Admin_panel from "./Admin_panel.jsx";
 import Display_jobs from "./Display_jobs.jsx";
@@ -11,7 +11,7 @@ export default function Admin() {
 
   const fetchJobs = async () => {
     try {
-      const response = await axios.get("http://localhost:8000/jobs");
+      const response = await api.get("/jobs");
       setJobs(response.data);
     } catch (err) {
       console.error("Error fetching jobs:", err);

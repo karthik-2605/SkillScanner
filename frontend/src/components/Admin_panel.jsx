@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
+import api from "../api.js";
 
 export default function Admin_panel({ fetchJobs, editingJob, setEditingJob }) {
   const [jobTitle, setjobTitle] = useState("");
@@ -14,9 +14,9 @@ export default function Admin_panel({ fetchJobs, editingJob, setEditingJob }) {
     if (editingJob) {
       setjobTitle(editingJob.job_title);
       setCompany(editingJob.company);
-      setLocation(editingJob.locatoin);
+      setLocation(editingJob.location);
       setCategory(editingJob.category);
-      setDescription(editingJob.description);
+      setDescription(editingJob.job_info);
       setShowPanel(true);
     }
   }, [editingJob]);
@@ -24,7 +24,7 @@ export default function Admin_panel({ fetchJobs, editingJob, setEditingJob }) {
   const handleSaveJob = async () => {
     try {
       if (editingJob) {
-        await axios.put(`http://localhost:8000/jobs/${editingJob.id}`, {
+        await api.put(`/jobs/${editingJob.id}`, {
           job_title: jobTitle,
           company,
           location,
@@ -33,7 +33,7 @@ export default function Admin_panel({ fetchJobs, editingJob, setEditingJob }) {
         });
         alert("Job updated!");
       } else {
-        await axios.post(`http://localhost:8000/add-job`, {
+        await api.post(`/add-job`, {
           job_title: jobTitle,
           company,
           location,
@@ -115,16 +115,18 @@ export default function Admin_panel({ fetchJobs, editingJob, setEditingJob }) {
                   value={category}
                   onChange={(e) => setCategory(e.target.value)}
                 >
+                  {/* Values match the labels in the resume dataset so that
+                      model predictions can surface matching jobs. */}
                   <option value="">Select Category</option>
                   <option value="Data Science">Data Science</option>
-                  {/* <option value="Web Designing">Frontend Development</option>
-                  <option value="Web Designing">Backend Development</option>
-                  <option value="Web Designing">Full Stack Development</option> */}
+                  <option value="Java Developer">Java Developer</option>
+                  <option value="Python Developer">Python Developer</option>
                   <option value="Web Designing">Web Developer</option>
                   <option value="DevOps Engineer">DevOps Engineer</option>
-                  <option value="mobile">Mobile Development</option>
-                  {/* <option value="Web Designing">UI/UX Design</option> */}
-                  <option value="Testing">Product Management</option>
+                  <option value="Testing">Testing / QA</option>
+                  <option value="Business Analyst">Business Analyst</option>
+                  <option value="Hadoop">Big Data / Hadoop</option>
+                  <option value="HR">HR</option>
                 </select>
               </div>
 
